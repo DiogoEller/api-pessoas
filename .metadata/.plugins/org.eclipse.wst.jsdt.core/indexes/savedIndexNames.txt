@@ -1,0 +1,8 @@
+INDEX VERSION 1.4+D:\Diogo\Workspace\.metadata\.plugins\org.eclipse.wst.jsdt.core\indexes
+3268294747.index
+852258856.index
+2610346940.index
+3876125715.index
+1357212290.index
+3543470980.index
+969447694.index

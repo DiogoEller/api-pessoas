@@ -1,0 +1,32 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml"
+	xmlns:h="http://java.sun.com/jsf/html">
+
+<h:body>
+	<h1>Nova Pessoa</h1>
+	<h:form>
+		<fieldset>
+			<legend>Dados da Pessoa</legend>
+			<h:panelGrid columns="2">
+
+				<h:outputLabel value="Nome:" for="nome" />
+				<h:inputText id="Nome" value="#{pessoaBean.pessoa.nome}" />
+
+				<h:outputLabel value="E-mail:" for="email" />
+				<h:inputText id="email" value="#{pessoaBean.pessoa.email}" />
+
+				<h:outputLabel value="CPF:" for="cpf" />
+				<h:inputText id="cpf" value="#{pessoaBean.pessoa.cpf}" />
+
+				<h:outputLabel value="Data de Nascimento:" for="nascimento" />
+				<h:inputText id="nascimento" />
+
+			</h:panelGrid>
+		</fieldset>
+
+		<h:commandButton value="Gravar" action="#{pessoaBean.gravar}" />
+	</h:form>
+</h:body>
+
+</html>

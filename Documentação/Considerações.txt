@@ -1,0 +1,4 @@
+JPA com hibernate
+apache-tomcat-9.0.37
+
+http://localhost:8080/api-pessoas/pessoa.xhtml

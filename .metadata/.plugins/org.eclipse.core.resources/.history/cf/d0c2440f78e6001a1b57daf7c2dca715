@@ -1,0 +1,53 @@
+package br.com.apiPessoas.dao;
+
+import java.text.ParseException;
+import java.text.SimpleDateFormat;
+import java.util.Calendar;
+import java.util.Date;
+
+import javax.persistence.EntityManager;
+
+import br.com.apiPessoas.modelo.Pessoa;
+
+public class PopulaBanco {
+
+	public static void main(String[] args) {
+
+		EntityManager em = new JPAUtil().getEntityManager();
+
+		em.getTransaction().begin();
+
+		Pessoa diogo = geraPessoa("Diogo Eller", 1, "dbrunoeller@hotmail.com", 
+				new Date(1997, 1, 2), "Blumenau", "Brasileiro", "950.611.220-70");
+
+		em.persist(diogo);
+
+		em.getTransaction().commit();
+		em.close();
+
+	}
+
+	private static Livro geraPessoa(String isbn, String titulo, String data,
+			double preco, Autor autor) {
+		Livro livro = new Livro();
+		livro.setIsbn(isbn);
+		livro.setTitulo(titulo);
+		livro.setDataLancamento(data);
+		livro.setPreco(preco);
+		livro.adicionaAutor(autor);
+		return livro;
+	}
+
+	@SuppressWarnings("unused")
+	private static Calendar parseData(String data) {
+		try {
+			Date date = new SimpleDateFormat("dd/MM/yyyy").parse(data);
+			Calendar calendar = Calendar.getInstance();
+			calendar.setTime(date);
+			return calendar;
+		} catch (ParseException e) {
+			throw new IllegalArgumentException(e);
+		}
+	}
+
+}

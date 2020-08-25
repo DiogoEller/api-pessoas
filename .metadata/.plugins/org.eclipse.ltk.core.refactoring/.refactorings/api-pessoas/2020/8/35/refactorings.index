@@ -1,0 +1,13 @@
+1598318800807	Rename package 'br.com.caelum.livraria.bean'
+1598318938645	Rename package 'br.com.caelum.livraria.dao'
+1598318998675	Rename package 'br.com.caelum.livraria.modelo'
+1598319488461	Rename package 'br.com.api.bean'
+1598319695969	Rename package 'br.com.api.dao'
+1598319710625	Rename package 'br.com.api.modelo'
+1598320285385	Rename compilation unit 'Livro.java'
+1598320604174	Rename compilation unit 'LivroBean.java'
+1598320744633	Delete element
+1598320747322	Delete element
+1598322554624	Encapsulate field 'id'
+1598323578364	Delete element
+1598325609881	Delete element
