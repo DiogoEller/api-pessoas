@@ -1,0 +1,73 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml"
+	xmlns:h="http://java.sun.com/jsf/html"
+	xmlns:f="http://java.sun.com/jsf/core"
+	xmlns:p="http://primefaces.org/ui">
+
+	<h:head />
+	
+	<h:body>
+		<h1>Nova Pessoa</h1>
+		<h:form>
+
+			<h:messages id="messages" />
+
+			<fieldset>
+				<legend>Dados da Pessoa</legend>
+				<h:panelGrid columns="2">
+
+					<h:outputLabel value="Nome:" for="nome" />
+					<h:inputText id="nome" value="#{pessoaBean.pessoa.nome}"
+						required="true" requiredMessage="Nome obrigatório"
+						validatorMessage="Nome não pode ser superior a 40">
+						<f:validateLength maximum="40" />
+						<f:ajax event="blur" render="messages" />
+					</h:inputText>
+
+					<h:outputLabel value="Sexo:" for="sexo" />
+					<h:selectOneMenu id="tipo" value="#{pessoaBean.pessoa.sexo}" style="width:177px">
+                       <f:selectItem itemLabel="Masculino" itemValue="0" />
+                       <f:selectItem itemLabel="Feminino" itemValue="1" />
+                    </h:selectOneMenu>
+					
+					<h:outputLabel value="E-mail:" for="email" />
+					<h:inputText id="email" value="#{pessoaBean.pessoa.email}" />
+
+					<h:outputLabel value="Data de nascimento:" for="nascimento" />
+					<h:inputText id="nascimento" value="#{pessoaBean.pessoa.nascimento.time}"
+						required="true" requiredMessage="Data de nascimento obrigatório"
+						validatorMessage="A data de nascimento é obrigatória">>
+						<f:convertDateTime pattern="dd/MM/yyyy" timeZone="America/Sao_Paulo" />
+						<f:ajax event="blur" render="messages" />
+					</h:inputText>
+					
+					<h:outputLabel value="Naturalidade:" for="naturalidade" />
+					<h:inputText id="naturalidade" value="#{pessoaBean.pessoa.naturalidade}" />
+					
+					<h:outputLabel value="Nacionalidade:" for="nacionalidade" />
+					<h:inputText id="nacionalidade" value="#{pessoaBean.pessoa.nacionalidade}" />
+
+					<h:outputLabel value="CPF:" for="cpf" />
+					<p:inputMask id="cpf" validator="#{pessoaBean.validaCPF}" value="#{clienteBean.cliente.cpf}" 
+						mask="999.999.999-99" size="11" required="true" 
+						requiredMessage="Campo CPF é obrigatório" />
+						
+					<h:inputText id="cpf" value="#{pessoaBean.pessoa.cpf}" 
+						required="true" requiredMessage="CPF obrigatório"
+						validatorMessage="O CPF é obrigatório" >
+						<f:validateLength maximum="11" />
+						<f:ajax event="blur" render="messages" />
+					</h:inputText>
+					
+
+				</h:panelGrid>
+			</fieldset>
+
+
+		</h:form>
+	
+	
+	</h:body>
+
+</html>
