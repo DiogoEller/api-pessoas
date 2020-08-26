@@ -1,0 +1,49 @@
+package br.com.apiPessoas.bean;
+
+import javax.faces.application.FacesMessage;
+import javax.faces.bean.ManagedBean;
+import javax.faces.component.UIComponent;
+import javax.faces.context.FacesContext;
+import javax.faces.validator.ValidatorException;
+import javax.persistence.EntityManager;
+
+import br.com.apiPessoas.dao.DAO;
+import br.com.apiPessoas.dao.JPAUtil;
+import br.com.apiPessoas.modelo.Pessoa;
+
+@ManagedBean
+public class PessoaBean {
+
+	private Pessoa pessoa = new Pessoa();
+
+	public Pessoa getPessoa() {
+		return pessoa;
+	}
+
+	public void gravar() {
+		System.out.println("Gravando pessoa " + this.pessoa.getNome());
+
+		if (pessoa.getNascimento() == null) {
+			throw new ValidatorException(new FacesMessage("Data de nascimento obrigatória"));
+		}
+
+		new DAO<Pessoa>(Pessoa.class).adiciona(this.pessoa);
+		
+		this.pessoa = new Pessoa();
+	}
+
+	public void validaCPF(FacesContext fc, UIComponent component, Object value) throws ValidatorException {
+		String valor = value.toString();
+		
+		EntityManager em = new JPAUtil().getEntityManager();
+		long result = (Long) em.createQuery("select count(n) from pessoa p where ")
+				.getSingleResult();
+		em.close();
+		
+		if (!valor.startsWith("1")) {
+			throw new ValidatorException(new FacesMessage(
+					"ISBN deveria come�ar com 1"));
+		}
+
+	}
+}
