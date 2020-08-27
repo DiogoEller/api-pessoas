@@ -17,6 +17,9 @@
 				<legend>Dados da Pessoa</legend>
 				<h:panelGrid columns="2">
 
+					<h:outputLabel value="ID:" for="id" />
+					<h:inputText id="id" value="#{pessoaBean.pessoa.id}" readonly="true"/>
+					
 					<h:outputLabel value="Nome:" for="nome" />
 					<h:inputText id="nome" value="#{pessoaBean.pessoa.nome}"
 						required="true" requiredMessage="Nome obrigatório"

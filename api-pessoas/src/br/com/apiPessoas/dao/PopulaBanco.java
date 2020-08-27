@@ -8,6 +8,7 @@ import java.util.Date;
 import javax.persistence.EntityManager;
 
 import br.com.apiPessoas.modelo.Pessoa;
+import br.com.apiPessoas.modelo.Usuario;
 
 public class PopulaBanco {
 
@@ -21,7 +22,11 @@ public class PopulaBanco {
 				 "Blumenau", "Brasileiro", "950.611.220-70");
 
 		em.persist(diogo);
+		
+		Usuario usuario = geraUsuario("dbrunoeller@hotmail.com","123");
 
+		em.persist(usuario);
+		
 		em.getTransaction().commit();
 		em.close();
 
@@ -39,6 +44,14 @@ public class PopulaBanco {
 		pessoa.setCpf(cpf);
 		return pessoa;
 	}
+	
+	private static Usuario geraUsuario(String email, String senha) {
+		Usuario usuario = new Usuario();
+		usuario.setEmail(email);
+		usuario.setSenha(senha);
+		return usuario;
+	}
+
 
 	@SuppressWarnings("unused")
 	private static Calendar parseData(String data) {

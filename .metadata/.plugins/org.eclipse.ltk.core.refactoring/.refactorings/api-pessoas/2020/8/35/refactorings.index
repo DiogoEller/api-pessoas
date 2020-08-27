@@ -15,3 +15,10 @@
 1598401260727	Delete element
 1598401520857	Encapsulate field 'sexo'
 1598402352943	Delete element
+1598492886221	Copy file
+1598493333072	Copy compilation unit
+1598493425697	Encapsulate field 'email'
+1598493427793	Encapsulate field 'senha'
+1598493487639	Copy compilation unit
+1598493828431	Encapsulate field 'usuario'
+1598494828727	Extract local variable 'createQuery'

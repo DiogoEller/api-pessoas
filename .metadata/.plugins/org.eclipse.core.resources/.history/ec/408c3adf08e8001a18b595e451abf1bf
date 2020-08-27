@@ -1,0 +1,13 @@
+package br.com.apiPessoas.bean;
+
+import javax.faces.bean.ManagedBean;
+
+import br.com.apiPessoas.modelo.Pessoa;
+import br.com.apiPessoas.modelo.Usuario;
+
+@ManagedBean
+public class LoginBean {
+
+	private Usuario usuario = new Usuario();
+
+}

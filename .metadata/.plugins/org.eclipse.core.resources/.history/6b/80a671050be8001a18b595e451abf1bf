@@ -1,0 +1,8 @@
+package br.com.apiPessoas.dao;
+
+public class UsuarioDAO {
+
+	public boolean existe(Usuario usuario) {
+		
+	}
+}
