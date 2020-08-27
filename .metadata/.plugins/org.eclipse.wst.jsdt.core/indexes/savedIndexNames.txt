@@ -5,5 +5,4 @@ INDEX VERSION 1.4+D:\Diogo\Workspace\.metadata\.plugins\org.eclipse.wst.jsdt.cor
 3876125715.index
 1357212290.index
 3543470980.index
-4010404357.index
 969447694.index
