@@ -46,57 +46,69 @@
 					<h:inputText id="nacionalidade" value="#{pessoaBean.pessoa.nacionalidade}" />
 
 					<h:outputLabel value="CPF:" for="cpf" />
-					<h:inputText id="cpfInput" value="#{pessoaBean.pessoa.cpf}" maxlength="11" required="true"
-						requiredMessage="CPF obrigatório">
+					<p:inputMask id="cpfInput" value="#{pessoaBean.pessoa.cpf}" 
+						mask="999.999.999-99" size="11" required="true" requiredMessage="Campo CPF é obrigatório" >
 						<f:ajax event="blur" render="messages" />
-					</h:inputText>
+					</p:inputMask>
 
 				</h:panelGrid>
 			</fieldset>
 		</h:form>
 		
-		<h:commandButton value="Gravar" action="#{pessoaBean.gravar}">
-			<f:ajax execute="@form" render="@form :tabelaPessoas" />
+		<h:commandButton value="Salvar Pessoa" action="#{pessoaBean.gravar}">
+			<f:ajax execute="@form" render="@form :formTabelaPessoas:tabelaPessoas" />
 		</h:commandButton>
 		
-		<h:dataTable value="#{pessoaBean.pessoas}" var="pessoa" id="tabelaPessoas">
-			<h:column>
-				<f:facet name="header">Nome</f:facet>
-				<h:outputText value="#{pessoa.nome}" />
-			</h:column>
-
-			<h:column>
-				<f:facet name="header">Sexo</f:facet>
-				<h:outputText value="#{pessoa.sexo}" />
-			</h:column>
-
-			<h:column>
-				<f:facet name="header">E-mail</f:facet>
-				<h:outputText value="#{pessoa.email}"/>
-			</h:column>
-
-			<h:column>
-				<f:facet name="header">Data</f:facet>
-				<h:outputText value="#{pessoa.nascimento.time}">
-					<f:convertDateTime pattern="dd/MM/yyyy" timeZone="America/Sao_Paulo" />
-				</h:outputText>
-			</h:column>
-			
-			<h:column>
-				<f:facet name="header">Naturalidade</f:facet>
-				<h:outputText value="#{pessoa.naturalidade}"/>
-			</h:column>
-			
-			<h:column>
-				<f:facet name="header">Nacionalidade</f:facet>
-				<h:outputText value="#{pessoa.nacionalidade}"/>
-			</h:column>
-			
-			<h:column>
-				<f:facet name="header">CPF</f:facet>
-				<h:outputText value="#{pessoa.cpf}"/>
-			</h:column>
-		</h:dataTable>
+		<h:form id="formTabelaPessoas">
+			<h:dataTable value="#{pessoaBean.pessoas}" var="pessoa" id="tabelaPessoas">
+				<h:column>
+					<f:facet name="header">Nome</f:facet>
+					<h:outputText value="#{pessoa.nome}" />
+				</h:column>
+	
+				<h:column>
+					<f:facet name="header">Sexo</f:facet>
+					<h:outputText value="#{pessoa.sexo}" />
+				</h:column>
+	
+				<h:column>
+					<f:facet name="header">E-mail</f:facet>
+					<h:outputText value="#{pessoa.email}"/>
+				</h:column>
+	
+				<h:column>
+					<f:facet name="header">Data</f:facet>
+					<h:outputText value="#{pessoa.nascimento.time}">
+						<f:convertDateTime pattern="dd/MM/yyyy" timeZone="America/Sao_Paulo" />
+					</h:outputText>
+				</h:column>
+				
+				<h:column>
+					<f:facet name="header">Naturalidade</f:facet>
+					<h:outputText value="#{pessoa.naturalidade}"/>
+				</h:column>
+				
+				<h:column>
+					<f:facet name="header">Nacionalidade</f:facet>
+					<h:outputText value="#{pessoa.nacionalidade}"/>
+				</h:column>
+				
+				<h:column>
+					<f:facet name="header">CPF</f:facet>
+					<h:outputText value="#{pessoa.cpf}"/>
+				</h:column>
+				
+				<h:column>
+					<f:facet name="header">Alterar</f:facet>
+					<h:commandLink value="alterar" action="#{pessoaBean.carregar(pessoa)}"/>
+				</h:column>
+				
+				<h:column>
+					<f:facet name="header">Remover</f:facet>
+					<h:commandLink value="remove" action="#{pessoaBean.remover(pessoa)}"/>
+				</h:column>
+			</h:dataTable>
+		</h:form>
 	
 	</h:body>
 
