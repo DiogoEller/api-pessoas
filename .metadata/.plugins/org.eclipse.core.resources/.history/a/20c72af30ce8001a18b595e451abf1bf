@@ -8,14 +8,11 @@ import javax.faces.component.UIComponent;
 import javax.faces.context.FacesContext;
 import javax.faces.validator.ValidatorException;
 import javax.persistence.EntityManager;
-import javax.persistence.NoResultException;
 import javax.persistence.Query;
-import javax.persistence.TypedQuery;
 
 import br.com.apiPessoas.dao.DAO;
 import br.com.apiPessoas.dao.JPAUtil;
 import br.com.apiPessoas.modelo.Pessoa;
-import br.com.apiPessoas.modelo.Usuario;
 
 @ManagedBean
 public class PessoaBean {
@@ -31,39 +28,32 @@ public class PessoaBean {
 	}
 
 	public void gravar() {
+		System.out.println("Gravando pessoa " + this.pessoa.getNome());
 
-		if (validaCPF(this.pessoa.getCpf())) {
+		if (false) {
+			throw new ValidatorException(new FacesMessage("CPF já existe no sistema"));
+		} else {
 			if (this.pessoa.getId() == null) {
-				System.out.println("Adicionando pessoa " + this.pessoa.getNome());
 				new DAO<Pessoa>(Pessoa.class).adiciona(this.pessoa);
 			} else {
-				System.out.println("Atualizando pessoa " + this.pessoa.getNome());
 				new DAO<Pessoa>(Pessoa.class).atualiza(this.pessoa);
 			}
 			this.pessoa = new Pessoa();
-		} else {
-			throw new ValidatorException(new FacesMessage("CPF já existe no sistema"));
 		}
 	}
 
 	public boolean validaCPF(String cpf) {
-		
 		EntityManager em = new JPAUtil().getEntityManager();
-		TypedQuery<Pessoa> query = em.createQuery("select p "
-				+ "from Pessoa p "
-				+ "where cpf = :pCpf", Pessoa.class);
-		
-		query.setParameter("pCpf", cpf);
-		
-		try {
-			Pessoa resultado = query.getSingleResult();
-		} catch (NoResultException ex) {
-			return true;
-		}
-		
+		Query q = em.createQuery("select count(*) from Pessoa where cpf = :cpf ");
+		q.setParameter("cpf", "\""+cpf+"\"");
+		Integer teste = q.getFirstResult();
 		em.close();
 		
-		return false;
+		if (teste != null && teste > 0) {
+			return false;
+		} else {
+			return true;
+		}
 	}
 	
 	public void remover(Pessoa pessoa) {

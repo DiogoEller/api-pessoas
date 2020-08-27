@@ -31,18 +31,17 @@ public class PessoaBean {
 	}
 
 	public void gravar() {
+		System.out.println("Gravando pessoa " + this.pessoa.getNome());
 
 		if (validaCPF(this.pessoa.getCpf())) {
+			throw new ValidatorException(new FacesMessage("CPF já existe no sistema"));
+		} else {
 			if (this.pessoa.getId() == null) {
-				System.out.println("Adicionando pessoa " + this.pessoa.getNome());
 				new DAO<Pessoa>(Pessoa.class).adiciona(this.pessoa);
 			} else {
-				System.out.println("Atualizando pessoa " + this.pessoa.getNome());
 				new DAO<Pessoa>(Pessoa.class).atualiza(this.pessoa);
 			}
 			this.pessoa = new Pessoa();
-		} else {
-			throw new ValidatorException(new FacesMessage("CPF já existe no sistema"));
 		}
 	}
 
@@ -58,12 +57,12 @@ public class PessoaBean {
 		try {
 			Pessoa resultado = query.getSingleResult();
 		} catch (NoResultException ex) {
-			return true;
+			return false;
 		}
 		
 		em.close();
 		
-		return false;
+		return true;
 	}
 	
 	public void remover(Pessoa pessoa) {

@@ -18,7 +18,7 @@ public class UsuarioDAO {
 		query.setParameter("pSenha", usuario.getSenha());
 		
 		try {
-			Usuario resultado = query.getSingleResult();
+			Usuario resultado = query.getSingleResult();			
 		} catch (NoResultException ex) {
 			return false;
 		}

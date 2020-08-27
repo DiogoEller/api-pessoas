@@ -31,13 +31,12 @@ public class PessoaBean {
 	}
 
 	public void gravar() {
+		System.out.println("Gravando pessoa " + this.pessoa.getNome());
 
 		if (validaCPF(this.pessoa.getCpf())) {
 			if (this.pessoa.getId() == null) {
-				System.out.println("Adicionando pessoa " + this.pessoa.getNome());
 				new DAO<Pessoa>(Pessoa.class).adiciona(this.pessoa);
 			} else {
-				System.out.println("Atualizando pessoa " + this.pessoa.getNome());
 				new DAO<Pessoa>(Pessoa.class).atualiza(this.pessoa);
 			}
 			this.pessoa = new Pessoa();
