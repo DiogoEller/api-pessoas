@@ -1,10 +1,13 @@
 package br.com.apiPessoas.modelo;
 
+import java.util.Calendar;
 import java.util.Date;
 
 import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
 import javax.persistence.Id;
+import javax.persistence.Temporal;
+import javax.persistence.TemporalType;
 
 @Entity
 public class Pessoa {
@@ -14,9 +17,10 @@ public class Pessoa {
 	private Integer id;
 	
 	private String nome;
-	private int sexo;
+	private String sexo;
 	private String email;
-	private Date nascimento;
+	@Temporal(TemporalType.DATE)
+	private Calendar nascimento = Calendar.getInstance();
 	private String naturalidade;
 	private String nacionalidade;
 	private String cpf;
@@ -35,10 +39,10 @@ public class Pessoa {
 		this.nome = nome;
 	}
 	
-	public int getSexo() {
+	public String getSexo() {
 		return sexo;
 	}
-	public void setSexo(int sexo) {
+	public void setSexo(String sexo) {
 		this.sexo = sexo;
 	}
 	
@@ -49,10 +53,10 @@ public class Pessoa {
 		this.email = email;
 	}
 	
-	public Date getNascimento() {
+	public Calendar getNascimento() {
 		return nascimento;
 	}
-	public void setNascimento(Date nascimento) {
+	public void setNascimento(Calendar nascimento) {
 		this.nascimento = nascimento;
 	}
 	

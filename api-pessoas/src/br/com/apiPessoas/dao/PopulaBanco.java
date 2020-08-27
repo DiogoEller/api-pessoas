@@ -17,7 +17,7 @@ public class PopulaBanco {
 
 		em.getTransaction().begin();
 
-		Pessoa diogo = geraPessoa("Diogo Eller", 1, "dbrunoeller@hotmail.com", 
+		Pessoa diogo = geraPessoa("Diogo Eller", "Masculino", "dbrunoeller@hotmail.com", "01/01/1990",
 				 "Blumenau", "Brasileiro", "950.611.220-70");
 
 		em.persist(diogo);
@@ -27,13 +27,13 @@ public class PopulaBanco {
 
 	}
 
-	private static Pessoa geraPessoa(String nome, int sexo, String email,
+	private static Pessoa geraPessoa(String nome, String sexo, String email, String nasc,
 			String nat, String nac, String cpf) {
 		Pessoa pessoa = new Pessoa();
 		pessoa.setNome(nome);
 		pessoa.setSexo(sexo);
 		pessoa.setEmail(email);
-		//pessoa.setNascimento(nasc);
+		pessoa.setNascimento(parseData(nasc));
 		pessoa.setNaturalidade(nat);
 		pessoa.setNacionalidade(nac);
 		pessoa.setCpf(cpf);

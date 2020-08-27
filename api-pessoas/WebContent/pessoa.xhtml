@@ -20,16 +20,13 @@
 					<h:outputLabel value="Nome:" for="nome" />
 					<h:inputText id="nome" value="#{pessoaBean.pessoa.nome}"
 						required="true" requiredMessage="Nome obrigatório"
-						validatorMessage="Nome não pode ser superior a 40">
+						validatorMessage="Nome não pode ser superior a 40 caracteres">
 						<f:validateLength maximum="40" />
 						<f:ajax event="blur" render="messages" />
 					</h:inputText>
 
 					<h:outputLabel value="Sexo:" for="sexo" />
-					<h:selectOneMenu id="tipo" value="#{pessoaBean.pessoa.sexo}" style="width:177px">
-                       <f:selectItem itemLabel="Masculino" itemValue="0" />
-                       <f:selectItem itemLabel="Feminino" itemValue="1" />
-                    </h:selectOneMenu>
+					<h:inputText id="sexo" value="#{pessoaBean.pessoa.sexo}" />
 					
 					<h:outputLabel value="E-mail:" for="email" />
 					<h:inputText id="email" value="#{pessoaBean.pessoa.email}" />
@@ -49,24 +46,57 @@
 					<h:inputText id="nacionalidade" value="#{pessoaBean.pessoa.nacionalidade}" />
 
 					<h:outputLabel value="CPF:" for="cpf" />
-					<p:inputMask id="cpf" validator="#{pessoaBean.validaCPF}" value="#{pessoaBean.pessoa.cpf}" 
-						mask="999.999.999-99" size="11" required="true" requiredMessage="Campo CPF é obrigatório" >
+					<h:inputText id="cpfInput" value="#{pessoaBean.pessoa.cpf}" maxlength="11" required="true"
+						requiredMessage="CPF obrigatório">
 						<f:ajax event="blur" render="messages" />
-					</p:inputMask>
-						
-					<!-- <h:inputText id="cpf" value="#{pessoaBean.pessoa.cpf}" 
-						required="true" requiredMessage="CPF obrigatório"
-						validatorMessage="O CPF é obrigatório" >
-						<f:validateLength maximum="11" />
-					</h:inputText> -->
-					
+					</h:inputText>
 
 				</h:panelGrid>
 			</fieldset>
-
-
 		</h:form>
-	
+		
+		<h:commandButton value="Gravar" action="#{pessoaBean.gravar}">
+			<f:ajax execute="@form" render="@form :tabelaPessoas" />
+		</h:commandButton>
+		
+		<h:dataTable value="#{pessoaBean.pessoas}" var="pessoa" id="tabelaPessoas">
+			<h:column>
+				<f:facet name="header">Nome</f:facet>
+				<h:outputText value="#{pessoa.nome}" />
+			</h:column>
+
+			<h:column>
+				<f:facet name="header">Sexo</f:facet>
+				<h:outputText value="#{pessoa.sexo}" />
+			</h:column>
+
+			<h:column>
+				<f:facet name="header">E-mail</f:facet>
+				<h:outputText value="#{pessoa.email}"/>
+			</h:column>
+
+			<h:column>
+				<f:facet name="header">Data</f:facet>
+				<h:outputText value="#{pessoa.nascimento.time}">
+					<f:convertDateTime pattern="dd/MM/yyyy" timeZone="America/Sao_Paulo" />
+				</h:outputText>
+			</h:column>
+			
+			<h:column>
+				<f:facet name="header">Naturalidade</f:facet>
+				<h:outputText value="#{pessoa.naturalidade}"/>
+			</h:column>
+			
+			<h:column>
+				<f:facet name="header">Nacionalidade</f:facet>
+				<h:outputText value="#{pessoa.nacionalidade}"/>
+			</h:column>
+			
+			<h:column>
+				<f:facet name="header">CPF</f:facet>
+				<h:outputText value="#{pessoa.cpf}"/>
+			</h:column>
+		</h:dataTable>
 	
 	</h:body>
 
