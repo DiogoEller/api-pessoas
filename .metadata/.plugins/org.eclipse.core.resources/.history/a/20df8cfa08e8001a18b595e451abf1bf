@@ -1,0 +1,15 @@
+package br.com.apiPessoas.bean;
+
+import javax.faces.bean.ManagedBean;
+
+import br.com.apiPessoas.modelo.Usuario;
+
+@ManagedBean
+public class LoginBean {
+
+	private Usuario usuario = new Usuario();
+
+	public void efetuaLogin() {
+		System.out.println("Fazendo login do usuario " this.usuario.getEmail());
+	}
+}

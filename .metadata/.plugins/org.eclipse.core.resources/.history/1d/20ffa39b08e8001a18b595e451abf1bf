@@ -1,0 +1,21 @@
+package br.com.apiPessoas.modelo;
+
+import java.util.Calendar;
+import java.util.Date;
+
+import javax.persistence.Entity;
+import javax.persistence.GeneratedValue;
+import javax.persistence.Id;
+import javax.persistence.Temporal;
+import javax.persistence.TemporalType;
+
+@Entity
+public class Usuario {
+
+	@Id
+	@GeneratedValue
+	private Integer id;
+	
+	private String email;
+	private String senha;
+}

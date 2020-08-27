@@ -1,0 +1,11 @@
+package br.com.apiPessoas.dao;
+
+import br.com.apiPessoas.modelo.Usuario;
+
+public class UsuarioDAO {
+
+	public boolean existe(Usuario usuario) {
+		return false;
+		
+	}
+}

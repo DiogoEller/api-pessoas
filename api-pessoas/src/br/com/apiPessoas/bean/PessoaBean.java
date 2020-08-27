@@ -30,10 +30,14 @@ public class PessoaBean {
 	public void gravar() {
 		System.out.println("Gravando pessoa " + this.pessoa.getNome());
 
-		if (validaCPF(this.pessoa.getCpf())) {
+		if (false) {
 			throw new ValidatorException(new FacesMessage("CPF já existe no sistema"));
 		} else {
-			new DAO<Pessoa>(Pessoa.class).adiciona(this.pessoa);
+			if (this.pessoa.getId() == null) {
+				new DAO<Pessoa>(Pessoa.class).adiciona(this.pessoa);
+			} else {
+				new DAO<Pessoa>(Pessoa.class).atualiza(this.pessoa);
+			}
 			this.pessoa = new Pessoa();
 		}
 	}
