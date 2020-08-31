@@ -14,20 +14,11 @@ public class DAO<T> {
 	}
 
 	public void adiciona(T t) {
-
-		// consegue a entity manager
 		EntityManager em = new JPAUtil().getEntityManager();
 
-		// abre transacao
 		em.getTransaction().begin();
-
-		// persiste o objeto
 		em.persist(t);
-
-		// commita a transacao
 		em.getTransaction().commit();
-
-		// fecha a entity manager
 		em.close();
 	}
 
@@ -71,8 +62,7 @@ public class DAO<T> {
 
 	public int contaTodos() {
 		EntityManager em = new JPAUtil().getEntityManager();
-		long result = (Long) em.createQuery("select count(n) from Pessoa p")
-				.getSingleResult();
+		long result = (Long) em.createQuery("select count(n) from Pessoa p").getSingleResult();
 		em.close();
 
 		return (int) result;

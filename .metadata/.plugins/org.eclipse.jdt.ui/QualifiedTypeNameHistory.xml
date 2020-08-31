@@ -4,4 +4,10 @@
 <fullyQualifiedTypeName name="java.util.Date"/>
 <fullyQualifiedTypeName name="java.time.format.DateTimeFormatter"/>
 <fullyQualifiedTypeName name="java.time.LocalDate"/>
+<fullyQualifiedTypeName name="javax.persistence.Temporal"/>
+<fullyQualifiedTypeName name="javax.persistence.TemporalType"/>
+<fullyQualifiedTypeName name="java.util.Calendar"/>
+<fullyQualifiedTypeName name="br.com.apiPessoas.modelo.Usuario"/>
+<fullyQualifiedTypeName name="br.com.apiPessoas.dao.UsuarioDAO"/>
+<fullyQualifiedTypeName name="javax.persistence.NoResultException"/>
 </qualifiedTypeNameHistroy>

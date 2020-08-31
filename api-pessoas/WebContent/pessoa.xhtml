@@ -8,17 +8,14 @@
 	<h:head />
 	
 	<h:body>
-		<h1>Nova Pessoa</h1>
+		<h1>Cadastro de Pessoas</h1>
 		<h:form>
 
 			<h:messages id="messages" />
 
 			<fieldset>
 				<legend>Dados da Pessoa</legend>
-				<h:panelGrid columns="2">
-
-					<h:outputLabel value="ID:" for="id" />
-					<h:inputText id="id" value="#{pessoaBean.pessoa.id}" readonly="true"/>
+				<h:panelGrid columns="2">			
 					
 					<h:outputLabel value="Nome:" for="nome" />
 					<h:inputText id="nome" value="#{pessoaBean.pessoa.nome}"
@@ -53,14 +50,18 @@
 						mask="999.999.999-99" size="11" required="true" requiredMessage="Campo CPF é obrigatório" >
 						<f:ajax event="blur" render="messages" />
 					</p:inputMask>
+					
+					<h:inputHidden id="id" value="#{pessoaBean.pessoa.id}" />
 
 				</h:panelGrid>
 			</fieldset>
 		</h:form>
 		
+		<h1/>
 		<h:commandButton value="Salvar Pessoa" action="#{pessoaBean.gravar}">
 			<f:ajax execute="@form" render="@form :formTabelaPessoas:tabelaPessoas" />
 		</h:commandButton>
+		<h1/>
 		
 		<h:form id="formTabelaPessoas">
 			<h:dataTable value="#{pessoaBean.pessoas}" var="pessoa" id="tabelaPessoas">
@@ -112,7 +113,5 @@
 				</h:column>
 			</h:dataTable>
 		</h:form>
-	
 	</h:body>
-
 </html>

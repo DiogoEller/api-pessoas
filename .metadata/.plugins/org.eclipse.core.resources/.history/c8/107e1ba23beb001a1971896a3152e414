@@ -1,0 +1,116 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml"
+	xmlns:h="http://java.sun.com/jsf/html"
+	xmlns:f="http://java.sun.com/jsf/core"
+	xmlns:p="http://primefaces.org/ui">
+
+	<h:head />
+	
+	<h:body>
+		<h1>Nova Pessoa</h1>
+		<h:form>
+
+			<h:messages id="messages" />
+
+			<fieldset>
+				<legend>Dados da Pessoa</legend>
+				<h:panelGrid columns="2">			
+					
+					<h:outputLabel value="Nome:" for="nome" />
+					<h:inputText id="nome" value="#{pessoaBean.pessoa.nome}"
+						required="true" requiredMessage="Nome obrigatório"
+						validatorMessage="Nome não pode ser superior a 40 caracteres">
+						<f:validateLength maximum="40" />
+						<f:ajax event="blur" render="messages" />
+					</h:inputText>
+
+					<h:inputHidden id="id" value="#{pessoaBean.pessoa.id}" />
+					<h:outputLabel value="Sexo:" for="sexo" />
+					<h:inputText id="sexo" value="#{pessoaBean.pessoa.sexo}" />
+					
+					<h:outputLabel value="E-mail:" for="email" />
+					<h:inputText id="email" value="#{pessoaBean.pessoa.email}" />
+
+					<h:outputLabel value="Data de nascimento:" for="nascimento" />
+					<h:inputText id="nascimento" value="#{pessoaBean.pessoa.nascimento.time}"
+						required="true" requiredMessage="Data de nascimento obrigatório"
+						validatorMessage="A data de nascimento é obrigatória">>
+						<f:convertDateTime pattern="dd/MM/yyyy" timeZone="America/Sao_Paulo" />
+						<f:ajax event="blur" render="messages" />
+					</h:inputText>
+					
+					<h:outputLabel value="Naturalidade:" for="naturalidade" />
+					<h:inputText id="naturalidade" value="#{pessoaBean.pessoa.naturalidade}" />
+					
+					<h:outputLabel value="Nacionalidade:" for="nacionalidade" />
+					<h:inputText id="nacionalidade" value="#{pessoaBean.pessoa.nacionalidade}" />
+
+					<h:outputLabel value="CPF:" for="cpf" />
+					<p:inputMask id="cpfInput" value="#{pessoaBean.pessoa.cpf}" 
+						mask="999.999.999-99" size="11" required="true" requiredMessage="Campo CPF é obrigatório" >
+						<f:ajax event="blur" render="messages" />
+					</p:inputMask>
+
+				</h:panelGrid>
+			</fieldset>
+		</h:form>
+		
+		<h:commandButton value="Salvar Pessoa" action="#{pessoaBean.gravar}">
+			<f:ajax execute="@form" render="@form :formTabelaPessoas:tabelaPessoas" />
+		</h:commandButton>
+		
+		<h:form id="formTabelaPessoas">
+			<h:dataTable value="#{pessoaBean.pessoas}" var="pessoa" id="tabelaPessoas">
+				<h:column>
+					<f:facet name="header">Nome</f:facet>
+					<h:outputText value="#{pessoa.nome}" />
+				</h:column>
+	
+				<h:column>
+					<f:facet name="header">Sexo</f:facet>
+					<h:outputText value="#{pessoa.sexo}" />
+				</h:column>
+	
+				<h:column>
+					<f:facet name="header">E-mail</f:facet>
+					<h:outputText value="#{pessoa.email}"/>
+				</h:column>
+	
+				<h:column>
+					<f:facet name="header">Data</f:facet>
+					<h:outputText value="#{pessoa.nascimento.time}">
+						<f:convertDateTime pattern="dd/MM/yyyy" timeZone="America/Sao_Paulo" />
+					</h:outputText>
+				</h:column>
+				
+				<h:column>
+					<f:facet name="header">Naturalidade</f:facet>
+					<h:outputText value="#{pessoa.naturalidade}"/>
+				</h:column>
+				
+				<h:column>
+					<f:facet name="header">Nacionalidade</f:facet>
+					<h:outputText value="#{pessoa.nacionalidade}"/>
+				</h:column>
+				
+				<h:column>
+					<f:facet name="header">CPF</f:facet>
+					<h:outputText value="#{pessoa.cpf}"/>
+				</h:column>
+				
+				<h:column>
+					<f:facet name="header">Alterar</f:facet>
+					<h:commandLink value="alterar" action="#{pessoaBean.carregar(pessoa)}"/>
+				</h:column>
+				
+				<h:column>
+					<f:facet name="header">Remover</f:facet>
+					<h:commandLink value="remove" action="#{pessoaBean.remover(pessoa)}"/>
+				</h:column>
+			</h:dataTable>
+		</h:form>
+	
+	</h:body>
+
+</html>
